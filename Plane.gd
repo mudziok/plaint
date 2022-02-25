@@ -31,8 +31,8 @@ func _process(delta):
 		var tween_time = 0.05
 		var tween = Tween.new()
 		add_child(tween)
-		tween.interpolate_property($Sprite, "scale:y", $Sprite.scale.y, 4.0, tween_time, Tween.TRANS_CUBIC)
+		tween.interpolate_property($Sprite, "scale:y", $Sprite.scale.y, 3.5, tween_time, Tween.TRANS_CUBIC)
 		tween.start()
 		yield(tween, "tween_completed")
-		tween.interpolate_property($Sprite, "scale:y", $Sprite.scale.y, 5.0, tween_time * 8, Tween.TRANS_CUBIC)
+		tween.interpolate_property($Sprite, "scale:y", $Sprite.scale.y, 4.0, tween_time * 8, Tween.TRANS_CUBIC)
 		tween.start()
