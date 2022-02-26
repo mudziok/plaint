@@ -21,6 +21,7 @@ var last_trail = null
 func _ready():
 	position = Vector2(-50,300) #do wywalenia po testach
 	rotate(PI/2)
+
 func _process(delta):
 	position += Vector2.UP.rotated(rotation)*velocity*delta
 	if position.x < -100:
@@ -36,7 +37,7 @@ func _process(delta):
 		velocity = min(velocity + acceleration*delta, max_velocity)
 		fuel_left -= fuel_usage*delta
 		if last_trail != null:
-			last_trail.add_point(position / 4)
+			last_trail.add_point(position / 4 + Vector2(25,25))
 			emit_signal("new_smoke", position)
 	else:
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
