@@ -1,5 +1,7 @@
 extends Node2D
 
+signal new_smoke(point)
+
 var rotate_speed = 4
 
 var acceleration = 4000
@@ -20,9 +22,6 @@ func _ready():
 	position = Vector2(-50,300) #do wywalenia po testach
 	rotate(PI/2)
 func _process(delta):
-	
-	print_debug(fuel_left) 
-	
 	position += Vector2.UP.rotated(rotation)*velocity*delta
 	if position.x < -100:
 		position.x = 1150
@@ -38,6 +37,7 @@ func _process(delta):
 		fuel_left -= fuel_usage*delta
 		if last_trail != null:
 			last_trail.add_point(position / 4)
+			emit_signal("new_smoke", position)
 	else:
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
 	
