@@ -9,8 +9,10 @@ signal destroyed
 
 var is_on_autopilot = false
 export (bool) var is_paused = false
+onready var refillTimer = $RefillTimer
 
 var rotate_speed = 4
+var can_refill = true
 
 var acceleration = 4000
 var drag = 1000
@@ -60,10 +62,12 @@ func _process(delta):
 		$PlaneSprite.squish()
 	
 	if Input.is_action_pressed("accelerate") and fuel_left > 0:
+		can_refill = false
+		refillTimer.start()
 		velocity = min(velocity + acceleration*delta, max_velocity)
 		fuel_left -= fuel_usage*delta
 		emit_signal("new_smoke_point", position)
-	else:
+	elif can_refill:
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
 	
 	emit_signal("fuel_changed", fuel_left)
@@ -71,3 +75,6 @@ func _process(delta):
 
 func on_collision(area):
 	emit_signal("destroyed")
+
+func _on_RefillTimer_timeout():
+	can_refill = true
