@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Bullet.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Plane.tscn" type="PackedScene" id=2]
 [ext_resource path="res://TrailPlane.tscn" type="PackedScene" id=3]
 [ext_resource path="res://BulletRocket.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Cloud.tscn" type="PackedScene" id=5]
 
 [node name="TestBulletScene" type="Node2D"]
 
@@ -13,7 +14,11 @@
 trailPane = NodePath("../TrailPlane")
 
 [node name="Bullet" parent="." instance=ExtResource( 1 )]
+position = Vector2( 766, 526 )
 player = NodePath("../Plane")
 
 [node name="BulletRocket" parent="." instance=ExtResource( 4 )]
-position = Vector2( 115, 567 )
+position = Vector2( 306, 561 )
+
+[node name="Cloud" parent="." instance=ExtResource( 5 )]
+position = Vector2( 893, 85 )
