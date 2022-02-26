@@ -9,3 +9,4 @@ func _ready():
 
 func level_finished():
 	print("Level finished")
+	$Plane.is_on_autopilot = true

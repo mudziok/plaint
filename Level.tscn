@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
 [ext_resource path="res://TrailPlane.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Plane.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Guide.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GuideManager.gd" type="Script" id=5]
 [ext_resource path="res://Camera.gd" type="Script" id=6]
 [ext_resource path="res://guides/Heart.tscn" type="PackedScene" id=7]
@@ -20,11 +19,8 @@ margin_bottom = 50.0
 [node name="Guide Manager" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
-[node name="Guide" parent="Guide Manager" instance=ExtResource( 4 )]
-position = Vector2( 556, 16 )
-
 [node name="Guide3" parent="Guide Manager" instance=ExtResource( 7 )]
-position = Vector2( 323, 204 )
+position = Vector2( 410, 174 )
 
 [node name="Plane" parent="." instance=ExtResource( 3 )]
 position = Vector2( 194, 252 )

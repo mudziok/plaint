@@ -5,6 +5,8 @@ signal new_smoke_point(point)
 
 signal destroyed
 
+var is_on_autopilot = false
+
 var rotate_speed = 4
 
 var acceleration = 4000
@@ -31,9 +33,13 @@ func fix_out_of_bounds():
 
 func _process(delta):
 	position += Vector2.UP.rotated(rotation)*velocity*delta
+	velocity = max(velocity - drag*delta, min_velocity)
+	
 	fix_out_of_bounds()
 	
-	velocity = max(velocity - drag*delta, min_velocity)
+	if is_on_autopilot:
+		rotation = lerp_angle(rotation, 0, 0.05)
+		return
 	
 	if Input.is_action_pressed("left"):
 		rotation -= rotate_speed*delta*velocity*0.003
