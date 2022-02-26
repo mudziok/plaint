@@ -1,10 +1,17 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Level.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/parallax/close.png" type="Texture" id=2]
+[ext_resource path="res://sprites/parallax/middle.png" type="Texture" id=3]
+[ext_resource path="res://sprites/parallax/distant.png" type="Texture" id=4]
+[ext_resource path="res://sprites/parallax/mountains.png" type="Texture" id=5]
 
 [node name="LevelManager" type="Node2D"]
 
-[node name="Sky" type="ColorRect" parent="."]
+[node name="SkyLayer" type="CanvasLayer" parent="."]
+layer = -128
+
+[node name="Sky" type="ColorRect" parent="SkyLayer"]
 margin_left = -100.0
 margin_top = -100.0
 margin_right = 1124.0
@@ -13,5 +20,43 @@ color = Color( 0.254902, 0.65098, 0.964706, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="ParallaxLayer" type="ParallaxBackground" parent="."]
+offset = Vector2( 0, 490 )
+scale = Vector2( 4, 4 )
+transform = Transform2D( 4, 0, 0, 4, 0, 490 )
+scroll_base_scale = Vector2( 1, 0.4 )
+
+[node name="mountains" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2( 0.1, 1 )
+motion_mirroring = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/mountains"]
+texture = ExtResource( 5 )
+centered = false
+
+[node name="distant" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2( 0.2, 1 )
+motion_mirroring = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/distant"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="middle" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2( 0.3, 1 )
+motion_mirroring = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/middle"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="close" type="ParallaxLayer" parent="ParallaxLayer"]
+motion_scale = Vector2( 0.4, 1 )
+motion_mirroring = Vector2( 256, 0 )
+
+[node name="Sprite" type="Sprite" parent="ParallaxLayer/close"]
+texture = ExtResource( 2 )
+centered = false
 
 [node name="Level" parent="." instance=ExtResource( 1 )]
