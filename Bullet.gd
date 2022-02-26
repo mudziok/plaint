@@ -10,8 +10,6 @@ var target_direction = 0
 func _ready():
 	pass # Replace with function body.
 
-
-
 func _process(delta):
 
 	var target_vector = Vector2(player.position.x - position.x,player.position.y - position.y)
