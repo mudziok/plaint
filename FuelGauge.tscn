@@ -1,0 +1,78 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://sprites/fuel_rim.png" type="Texture" id=1]
+[ext_resource path="res://shaders/distancemap.png" type="Texture" id=2]
+[ext_resource path="res://FuelGauge.gd" type="Script" id=3]
+
+[sub_resource type="Shader" id=4]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform vec4 color_light : hint_color;
+uniform vec4 color_dark : hint_color;
+
+void fragment() {
+	vec2 uv = SCREEN_UV.xy;
+	uv.y /= 5.0;
+	float n = texture(noise, (uv + TIME * 0.20)).r * 1.5;
+	float b = texture(TEXTURE, UV.xy).r;
+	float lighter = step(1.0, (-b * 1.4 + n * 3.0 - 1.0) * 2.0);
+	vec4 color = color_dark * (1.0 - lighter) + color_light * lighter;
+	COLOR = vec4(color.rgb, 1.0);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=1]
+
+[sub_resource type="NoiseTexture" id=2]
+width = 256
+height = 256
+seamless = true
+noise = SubResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 4 )
+shader_param/color_light = Color( 0.956863, 0.956863, 0.956863, 1 )
+shader_param/color_dark = Color( 0.580392, 0.690196, 0.760784, 1 )
+shader_param/noise = SubResource( 2 )
+
+[node name="FuelGauge" type="Control"]
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+margin_left = -100.0
+margin_top = -20.0
+margin_right = -50.0
+margin_bottom = -10.0
+rect_scale = Vector2( 4, 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 50, 10 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="ProgressBar" type="TextureProgress" parent="ViewportContainer/Viewport"]
+material = SubResource( 3 )
+margin_right = 50.0
+margin_bottom = 10.0
+value = 100.0
+texture_progress = ExtResource( 2 )
+nine_patch_stretch = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FuelRim" type="Sprite" parent="."]
+visible = false
+position = Vector2( -108, -28 )
+scale = Vector2( 4, 4 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="Tween" type="Tween" parent="."]

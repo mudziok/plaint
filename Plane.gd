@@ -3,6 +3,7 @@ extends Node2D
 signal start_smoke
 signal new_smoke_point(point)
 signal exited_top
+signal fuel_changed(value)
 
 signal destroyed
 
@@ -64,6 +65,8 @@ func _process(delta):
 		emit_signal("new_smoke_point", position)
 	else:
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
+	
+	emit_signal("fuel_changed", fuel_left)
 
 
 func on_collision(area):

@@ -11,9 +11,11 @@ func _ready():
 	yield($Arrow, "finished_blinking")
 	$Arrow.queue_free()
 	$Plane.is_paused = false
+	$CanvasLayer/FuelGauge.change_hidden(false)
 
 func level_finished():
 	$Plane.is_on_autopilot = true
+	$CanvasLayer/FuelGauge.change_hidden(true)
 	yield($Plane, "exited_top")
 	$Plane.is_paused = true
 	emit_signal("level_finished")
