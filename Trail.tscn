@@ -15,7 +15,7 @@ void fragment() {
 	float b = texture(TEXTURE, UV.xy).r;
 	float alpha = step(0.3, (-b + n) * 2.0);
 	float lighter = step(1.0, (-b + n) * 2.0);
-	vec4 color = color_dark + color_light * lighter;
+	vec4 color = color_dark * (1.0 - lighter) + color_light * lighter;
 	COLOR = vec4(color.rgb, alpha);
 }"
 
@@ -34,7 +34,7 @@ shader_param/noise = SubResource( 4 )
 [node name="Trail" type="Line2D"]
 material = SubResource( 2 )
 points = PoolVector2Array( 0, 3, 30, 27, 67, 34, 115, 33, 173, 30, 211, 44, 237, 79, 250, 128, 270, 181, 305, 203, 356, 213, 408, 203, 452, 178, 484, 139, 536, 132 )
-default_color = Color( 1, 1, 1, 1 )
+default_color = Color( 0, 0, 0, 1 )
 texture = ExtResource( 1 )
 texture_mode = 1
 joint_mode = 2
