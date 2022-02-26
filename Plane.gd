@@ -1,6 +1,6 @@
 extends Node2D
 
-var rotate_speed = 3
+var rotate_speed = 4
 
 var acceleration = 4000
 var drag = 1000
@@ -12,6 +12,8 @@ var fuel_left = 100
 var fuel_usage = 50
 var fuel_restore = 20
 
+export (NodePath) onready var trailPane = get_node(trailPane)
+var last_trail = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -28,6 +30,8 @@ func _process(delta):
 	if Input.is_action_pressed("accelerate") and fuel_left > 0:
 		velocity = min(velocity + acceleration*delta, max_velocity)
 		fuel_left -= fuel_usage*delta
+		if last_trail != null:
+			last_trail.add_point(position / 4)
 	else:
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
 	
@@ -37,6 +41,7 @@ func _process(delta):
 		rotation += rotate_speed*delta*velocity*0.003
 	
 	if Input.is_action_just_pressed("accelerate") :
+		last_trail = trailPane.create_new_line(position)
 		var tween_time = 0.05
 		
 		
@@ -48,4 +53,5 @@ func _process(delta):
 		tween.interpolate_property($Sprite, "scale:y", $Sprite.scale.y, 4.0, tween_time * 8, Tween.TRANS_CUBIC)
 		tween.start()
 	
-		
+	if Input.is_action_just_released("accelerate"):
+		last_trail = null

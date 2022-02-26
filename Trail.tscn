@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://shaders/distancemap.png" type="Texture" id=1]
+[ext_resource path="res://Trail.gd" type="Script" id=2]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+uniform sampler2D noise;
+uniform vec4 color_light : hint_color;
+uniform vec4 color_dark : hint_color;
+
+void fragment() {
+	float n = texture(noise, (SCREEN_UV.xy + TIME * 0.01) * 5.0).r * 1.5;
+	float b = texture(TEXTURE, UV.xy).r;
+	float alpha = step(0.3, (-b + n) * 2.0);
+	float lighter = step(1.0, (-b + n) * 2.0);
+	vec4 color = color_dark + color_light * lighter;
+	COLOR = vec4(color.rgb, alpha);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+
+[sub_resource type="NoiseTexture" id=4]
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/color_light = Color( 0.956863, 0.956863, 0.956863, 1 )
+shader_param/color_dark = Color( 0.580392, 0.690196, 0.760784, 1 )
+shader_param/noise = SubResource( 4 )
+
+[node name="Trail" type="Line2D"]
+material = SubResource( 2 )
+points = PoolVector2Array( 0, 3, 30, 27, 67, 34, 115, 33, 173, 30, 211, 44, 237, 79, 250, 128, 270, 181, 305, 203, 356, 213, 408, 203, 452, 178, 484, 139, 536, 132 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource( 2 )

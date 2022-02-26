@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Trail.tscn" type="PackedScene" id=1]
+[ext_resource path="res://TrailPlane.gd" type="Script" id=2]
+
+[node name="TrailPlane" type="ViewportContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -768.0
+margin_bottom = -450.0
+rect_scale = Vector2( 4, 4 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="."]
+size = Vector2( 256, 150 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Trail" parent="Viewport" instance=ExtResource( 1 )]
