@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
 [ext_resource path="res://TrailPlane.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Plane.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Guide.tscn" type="PackedScene" id=4]
+[ext_resource path="res://GuideManager.gd" type="Script" id=5]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
@@ -21,12 +22,18 @@ margin_right = 256.0
 margin_bottom = 150.0
 
 [node name="Guide Manager" type="Node2D" parent="."]
+script = ExtResource( 5 )
 
 [node name="Guide" parent="Guide Manager" instance=ExtResource( 4 )]
-points = PoolVector2Array( 52, 36, 82, 75, 113, 113, 177, 161, 260, 200, 323, 213, 406, 225, 510, 237, 566, 236, 617, 242, 685, 272, 745, 335, 773, 394, 792, 455, 818, 517, 860, 560, 947, 577 )
+
+[node name="Guide2" parent="Guide Manager" instance=ExtResource( 4 )]
+position = Vector2( 443, 318 )
 
 [node name="Plane" parent="." instance=ExtResource( 3 )]
 position = Vector2( 194, 252 )
 trailPane = NodePath("../TrailPlane")
 
+[connection signal="completed" from="Guide Manager/Guide" to="Guide Manager" method="_on_guide_completed"]
+[connection signal="completed" from="Guide Manager/Guide2" to="Guide Manager" method="_on_guide_completed"]
 [connection signal="new_smoke" from="Plane" to="Guide Manager/Guide" method="fill"]
+[connection signal="new_smoke" from="Plane" to="Guide Manager/Guide2" method="fill"]
