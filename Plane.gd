@@ -17,13 +17,19 @@ var last_trail = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	position = Vector2(200,200) #do wywalenia po testach
-
+	position = Vector2(-50,300) #do wywalenia po testach
+	rotate(PI/2)
 func _process(delta):
 	
 	print_debug(fuel_left) 
 	
 	position += Vector2.UP.rotated(rotation)*velocity*delta
+	if position.x < -100:
+		position.x = 1150
+		last_trail = trailPane.create_new_line(position)
+	elif position.x > 1150:
+		position.x = -100
+		last_trail = trailPane.create_new_line(position)
 	
 	velocity = max(velocity - drag*delta, min_velocity)
 	
