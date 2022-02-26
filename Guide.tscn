@@ -4,7 +4,7 @@
 [ext_resource path="res://Guide.gd" type="Script" id=2]
 
 [node name="Guide" type="Line2D"]
-points = PoolVector2Array( 52, 36, 82, 75, 113, 113, 177, 161, 260, 200, 323, 213, 406, 225, 510, 237, 566, 236, 617, 242, 685, 272, 745, 335, 773, 394, 792, 455, 818, 517, 860, 560, 947, 577 )
+points = PoolVector2Array( 52, 36, 82, 75, 113, 113, 177, 161, 260, 200, 323, 213, 406, 225, 510, 237 )
 default_color = Color( 1, 1, 1, 1 )
 texture = ExtResource( 1 )
 texture_mode = 1
