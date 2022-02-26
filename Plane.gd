@@ -2,6 +2,8 @@ extends Node2D
 
 signal new_smoke(point)
 
+signal destroyed
+
 var rotate_speed = 4
 
 var acceleration = 4000
@@ -62,3 +64,8 @@ func _process(delta):
 	
 	if Input.is_action_just_released("accelerate"):
 		last_trail = null
+
+
+func on_collision(area):
+	emit_signal("destroyed")
+	pass # Replace with function body.
