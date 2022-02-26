@@ -2,10 +2,12 @@ extends Node2D
 
 signal start_smoke
 signal new_smoke_point(point)
+signal exited_top
 
 signal destroyed
 
 var is_on_autopilot = false
+export (bool) var is_paused = false
 
 var rotate_speed = 4
 
@@ -23,21 +25,27 @@ func _ready():
 	position = Vector2(-50,300) #do wywalenia po testach
 	rotate(PI/2)
 
-func fix_out_of_bounds():
+func handle_out_of_bounds():
 	if position.x < -100:
 		position.x = 1124
 		emit_signal("start_smoke")
 	elif position.x > 1124:
 		position.x = -100
 		emit_signal("start_smoke")
+	if position.y < -100:
+		emit_signal("exited_top")
 
 func _process(delta):
+	if is_paused:
+		return
+	
 	position += Vector2.UP.rotated(rotation)*velocity*delta
 	velocity = max(velocity - drag*delta, min_velocity)
 	
-	fix_out_of_bounds()
+	handle_out_of_bounds()
 	
 	if is_on_autopilot:
+		velocity = min(velocity + acceleration*delta, max_velocity)
 		rotation = lerp_angle(rotation, 0, 0.05)
 		return
 	

@@ -2,11 +2,18 @@ extends Node2D
 
 class_name Level
 
+signal level_finished
+
 var current_time = 0
 
 func _ready():
-	pass
+	$Arrow.blink()
+	yield($Arrow, "finished_blinking")
+	$Arrow.queue_free()
+	$Plane.is_paused = false
 
 func level_finished():
-	print("Level finished")
 	$Plane.is_on_autopilot = true
+	yield($Plane, "exited_top")
+	$Plane.is_paused = true
+	emit_signal("level_finished")
