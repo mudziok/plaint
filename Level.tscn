@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Level.gd" type="Script" id=1]
 [ext_resource path="res://TrailPlane.tscn" type="PackedScene" id=2]
@@ -6,23 +6,46 @@
 [ext_resource path="res://Arrow.tscn" type="PackedScene" id=4]
 [ext_resource path="res://GuideManager.gd" type="Script" id=5]
 [ext_resource path="res://Camera.gd" type="Script" id=6]
-[ext_resource path="res://guides/Heart.tscn" type="PackedScene" id=7]
+[ext_resource path="res://guides/Mudkep12.tscn" type="PackedScene" id=7]
 [ext_resource path="res://FuelGauge.tscn" type="PackedScene" id=8]
+[ext_resource path="res://guides/Mudkep11.tscn" type="PackedScene" id=9]
+[ext_resource path="res://guides/Mudkep21.tscn" type="PackedScene" id=10]
+[ext_resource path="res://guides/Mudkep22.tscn" type="PackedScene" id=11]
+[ext_resource path="res://guides/Mudkep32.tscn" type="PackedScene" id=12]
+[ext_resource path="res://guides/Mudkep31.tscn" type="PackedScene" id=13]
 
 [node name="Level" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="TrailPlane" parent="." instance=ExtResource( 2 )]
-margin_left = -100.0
-margin_top = -100.0
-margin_right = 156.0
-margin_bottom = 50.0
+margin_left = -94.0
+margin_top = -117.0
+margin_right = 212.0
+margin_bottom = 83.0
 
 [node name="Guide Manager" type="Node2D" parent="."]
 script = ExtResource( 5 )
 
+[node name="Guide7" parent="Guide Manager" instance=ExtResource( 12 )]
+position = Vector2( 243, -103 )
+
+[node name="Guide2" parent="Guide Manager" instance=ExtResource( 9 )]
+position = Vector2( 371, 10 )
+
+[node name="Guide" parent="Guide Manager" instance=ExtResource( 9 )]
+position = Vector2( 263, 4 )
+
+[node name="Guide5" parent="Guide Manager" instance=ExtResource( 11 )]
+position = Vector2( 279, -107 )
+
+[node name="Guide4" parent="Guide Manager" instance=ExtResource( 10 )]
+position = Vector2( 125, -100 )
+
 [node name="Guide3" parent="Guide Manager" instance=ExtResource( 7 )]
-position = Vector2( 411, 114 )
+position = Vector2( 247, 15 )
+
+[node name="Guide6" parent="Guide Manager" instance=ExtResource( 13 )]
+position = Vector2( 235, -94 )
 
 [node name="Plane" parent="." instance=ExtResource( 3 )]
 position = Vector2( 194, 252 )
