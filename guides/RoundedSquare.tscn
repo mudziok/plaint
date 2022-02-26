@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://line_segment.png" type="Texture" id=1]
+[ext_resource path="res://Guide.gd" type="Script" id=2]
+
+[node name="Guide" type="Line2D"]
+position = Vector2( 5, 5 )
+points = PoolVector2Array( 315, 102, 331, 91, 353, 89, 436, 89, 496, 89, 564, 89, 646, 89, 668, 93, 683, 101, 692, 115, 698, 133, 698, 208, 698, 247, 698, 290, 698, 351, 694, 376, 686, 391, 669, 403, 647.993, 407.126, 579.993, 407.297, 498.001, 407.503, 422.994, 407.691, 352.995, 407.867, 330, 404, 315, 393, 303, 380, 299.686, 357.983, 299.417, 315.01, 299.003, 249, 298.57, 179.978, 298, 130, 305, 113, 315, 101 )
+default_color = Color( 1, 1, 1, 1 )
+texture = ExtResource( 1 )
+texture_mode = 1
+script = ExtResource( 2 )
