@@ -6,14 +6,6 @@ signal level_finished(trails)
 var current_time = 0
 
 func _ready():
-	$Plane.visible = false
-	$Arrow.visible = false
-	yield(get_tree().create_timer(2.0), "timeout")
-	$Arrow.visible = true
-	$Arrow.blink()
-	yield($Arrow, "finished_blinking")
-	$Arrow.queue_free()
-	$Plane.visible = true
 	$Plane.is_paused = false
 	emit_signal("level_starts")
 
