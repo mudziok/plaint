@@ -22,8 +22,12 @@ func _process(delta):
 	var target_vector = Vector2(player.position.x - position.x,player.position.y - position.y)
 	target_direction = target_vector.angle()+PI/2
 	
-	rotation = lerp_angle(rotation, target_direction, 0.05)
-	position += Vector2.UP.rotated(rotation)*min(velocity*delta*max(distance/300, 0.1), 200*delta)
+	if distance <= 100:
+		rotation = lerp_angle(rotation, target_direction+PI, 0.2)
+		position += Vector2.UP.rotated(rotation)*velocity*delta* min((100-distance)/20, 5)
+	else:
+		rotation = lerp_angle(rotation, target_direction, 0.05)
+		position += Vector2.UP.rotated(rotation)*min(velocity*delta*max(distance/300, 0.1), 200*delta)
 
 func on_collision(area):
 	queue_free()
