@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://Plane.tscn" type="PackedScene" id=1]
+[ext_resource path="res://FuelGauge.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Arrow.tscn" type="PackedScene" id=6]
+[ext_resource path="res://guides/Mudkep32.tscn" type="PackedScene" id=7]
+[ext_resource path="res://TrailPlane.tscn" type="PackedScene" id=9]
+[ext_resource path="res://guides/Mudkep31.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Level.gd" type="Script" id=11]
+[ext_resource path="res://GuideManager.gd" type="Script" id=12]
+[ext_resource path="res://Camera.gd" type="Script" id=13]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 11 )
+
+[node name="TrailPlane" parent="." instance=ExtResource( 9 )]
+margin_left = -94.0
+margin_top = -117.0
+margin_right = 212.0
+margin_bottom = 83.0
+
+[node name="Guide Manager" type="Node2D" parent="."]
+script = ExtResource( 12 )
+
+[node name="Guide7" parent="Guide Manager" instance=ExtResource( 7 )]
+position = Vector2( 241, 195 )
+
+[node name="Guide6" parent="Guide Manager" instance=ExtResource( 10 )]
+position = Vector2( 233, 200 )
+
+[node name="Plane" parent="." instance=ExtResource( 1 )]
+position = Vector2( 194, 252 )
+is_paused = true
+
+[node name="Camera" type="Camera2D" parent="."]
+position = Vector2( 512, 300 )
+current = true
+script = ExtResource( 13 )
+player = NodePath("../Plane")
+
+[node name="Arrow" parent="." instance=ExtResource( 6 )]
+position = Vector2( 50, 300 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="FuelGauge" parent="CanvasLayer" instance=ExtResource( 4 )]
+margin_left = 512.0
+margin_top = 550.0
+margin_right = 512.0
+margin_bottom = 550.0
+hidden = true
+
+[connection signal="all_guides_completed" from="Guide Manager" to="." method="level_finished"]
+[connection signal="fuel_changed" from="Plane" to="CanvasLayer/FuelGauge" method="set_value"]
+[connection signal="new_smoke_point" from="Plane" to="TrailPlane" method="new_trail_point"]
+[connection signal="new_smoke_point" from="Plane" to="Guide Manager" method="new_trail_point"]
+[connection signal="start_smoke" from="Plane" to="TrailPlane" method="new_trail"]

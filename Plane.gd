@@ -20,8 +20,8 @@ var velocity = 300
 var min_velocity = 250
 var max_velocity = 400
 
-var fuel_left = 100
-var fuel_usage = 50
+var fuel_left = 170
+var fuel_usage = 40
 var fuel_restore = 20
 
 func _ready():
