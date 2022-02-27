@@ -14,10 +14,10 @@
 script = ExtResource( 6 )
 
 [node name="TrailPlane" parent="." instance=ExtResource( 5 )]
-margin_left = -94.0
-margin_top = -117.0
-margin_right = 212.0
-margin_bottom = 83.0
+margin_left = -100.0
+margin_top = -100.0
+margin_right = 206.0
+margin_bottom = 100.0
 
 [node name="Guide Manager" type="Node2D" parent="."]
 script = ExtResource( 7 )

@@ -28,6 +28,12 @@ margin_top = -100.0
 margin_right = 206.0
 margin_bottom = 100.0
 
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 512, 420 )
+scale = Vector2( 4, 4 )
+frames = SubResource( 1 )
+playing = true
+
 [node name="Guide Manager" type="Node2D" parent="."]
 script = ExtResource( 7 )
 
@@ -55,12 +61,6 @@ margin_top = 550.0
 margin_right = 512.0
 margin_bottom = 550.0
 hidden = true
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
-position = Vector2( 512, 420 )
-scale = Vector2( 4, 4 )
-frames = SubResource( 1 )
-playing = true
 
 [connection signal="all_guides_completed" from="Guide Manager" to="." method="level_finished"]
 [connection signal="fuel_changed" from="Plane" to="CanvasLayer/FuelGauge" method="set_value"]

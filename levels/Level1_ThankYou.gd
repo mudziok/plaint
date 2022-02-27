@@ -1,7 +1,5 @@
 extends Node2D
 
-class_name Level
-
 signal level_starts
 signal level_finished(trails)
 
@@ -17,12 +15,10 @@ func _ready():
 	$Arrow.queue_free()
 	$Plane.visible = true
 	$Plane.is_paused = false
-	$CanvasLayer/FuelGauge.change_hidden(false)
 	emit_signal("level_starts")
 
 func level_finished():
 	$Plane.is_on_autopilot = true
-	$CanvasLayer/FuelGauge.change_hidden(true)
 	yield($Plane, "exited_top")
 	$Plane.is_paused = true
 	emit_signal("level_finished", $TrailPlane)
