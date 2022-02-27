@@ -47,6 +47,6 @@ func change_level(index):
 	current_level = new_level
 	current_level.connect("level_finished", self, "level_finished")
 	
-	if index == 2:
+	if index == 17:
 		print("co kurwa")
 		current_level.create_mashups(past_trails)
