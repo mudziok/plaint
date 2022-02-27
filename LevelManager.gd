@@ -30,6 +30,7 @@ func level_finished(trail):
 	call_deferred("change_level", level_number)
 	yield(exit_tween, "tween_completed")
 	
+	print(trail)
 	trail.get_parent().remove_child(trail)
 	past_trails.append(trail)
 	finished_level.queue_free()
@@ -45,3 +46,7 @@ func change_level(index):
 	
 	current_level = new_level
 	current_level.connect("level_finished", self, "level_finished")
+	
+	if index == 2:
+		print("co kurwa")
+		current_level.create_mashups(past_trails)
