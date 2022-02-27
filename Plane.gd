@@ -38,7 +38,7 @@ func handle_out_of_bounds():
 		position.x = -100
 		emit_signal("start_smoke")
 	if is_on_autopilot:
-		if position.y < -100:
+		if position.y < -200:
 			$EngineSound.stop()
 			emit_signal("exited_top")
 	else:
