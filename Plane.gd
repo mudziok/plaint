@@ -27,6 +27,8 @@ var fuel_restore = 20
 func _ready():
 	position = Vector2(-50,300) #do wywalenia po testach
 	rotate(PI/2)
+	yield(get_tree().create_timer(3.0), "timeout")
+	$EngineSound.start()
 
 func handle_out_of_bounds():
 	if position.x < -100:
@@ -37,6 +39,7 @@ func handle_out_of_bounds():
 		emit_signal("start_smoke")
 	if is_on_autopilot:
 		if position.y < -100:
+			$EngineSound.stop()
 			emit_signal("exited_top")
 	else:
 		if position.y < -100:
@@ -63,9 +66,12 @@ func _process(delta):
 	if Input.is_action_pressed("right"):
 		rotation += rotate_speed*delta*velocity*0.003
 	
-	if Input.is_action_just_pressed("accelerate") :
+	if Input.is_action_just_pressed("accelerate"):
 		emit_signal("start_smoke")
 		$PlaneSprite.squish()
+		$EngineSound.pitch_scale = 1.05
+	if Input.is_action_just_released("accelerate"):
+		$EngineSound.pitch_scale = 1.0
 	
 	if Input.is_action_pressed("accelerate") and fuel_left > 0:
 		can_refill = false
