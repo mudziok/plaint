@@ -35,8 +35,14 @@ func handle_out_of_bounds():
 	elif position.x > 1124:
 		position.x = -100
 		emit_signal("start_smoke")
-	if position.y < -100:
-		emit_signal("exited_top")
+	if is_on_autopilot:
+		if position.y < -100:
+			emit_signal("exited_top")
+	else:
+		if position.y < -100:
+			rotation = lerp_angle(rotation, PI, 0.1)
+		elif position.y > 700:
+			rotation = lerp_angle(rotation, 0, 0.1)
 
 func _process(delta):
 	if is_paused:

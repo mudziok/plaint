@@ -7,8 +7,10 @@ onready var exit_tween = $exit_tween
 onready var background_tween = $background_tween
 onready var enter_tween = $enter_tweeen
 
+var level_number = 0
+
 func _ready():
-	call_deferred("change_level", 0)
+	call_deferred("change_level", level_number)
 
 func level_finished():
 	yield(get_tree().create_timer(1.0), "timeout")
@@ -22,7 +24,8 @@ func level_finished():
 		old_offset, old_offset - 500.0, 2.0, Tween.TRANS_CUBIC)
 	background_tween.start()
 	
-	call_deferred("change_level", 1)
+	level_number += 1
+	call_deferred("change_level", level_number)
 	yield(exit_tween, "tween_completed")
 	print("gites")
 

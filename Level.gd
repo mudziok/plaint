@@ -2,6 +2,7 @@ extends Node2D
 
 class_name Level
 
+signal level_starts
 signal level_finished
 
 var current_time = 0
@@ -17,6 +18,7 @@ func _ready():
 	$Plane.visible = true
 	$Plane.is_paused = false
 	$CanvasLayer/FuelGauge.change_hidden(false)
+	emit_signal("level_starts")
 
 func level_finished():
 	$Plane.is_on_autopilot = true
