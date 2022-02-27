@@ -29,6 +29,5 @@ is_paused = true
 
 [node name="Camera" type="Camera2D" parent="."]
 position = Vector2( 512, 300 )
-current = true
 script = ExtResource( 8 )
 player = NodePath("../Plane")

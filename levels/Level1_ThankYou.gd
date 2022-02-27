@@ -18,14 +18,14 @@ func level_finished():
 func create_mashups(trails):
 	$trails/heart.add_child(trails[5])
 	$trails/heart.add_child(trails[7])
-	$trails/heart.position = 1000
+	$trails/heart.position.x = 1000
 	
 	$trails/tictac.add_child(trails[3])
 	$trails/tictac.add_child(trails[9])
 	$trails/tictac.add_child(trails[15])
-	$trails/tictac.position = 2000
+	$trails/tictac.position.x = 2000
 	
 	$trails/mudkip.add_child(trails[3])
 	$trails/mudkip.add_child(trails[9])
 	$trails/mudkip.add_child(trails[15])
-	$trails/mudkip.position = 3000
+	$trails/mudkip.position.x = 3000
