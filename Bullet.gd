@@ -2,7 +2,7 @@ extends Node2D
 
 export (NodePath) onready var player = get_node(player)
 
-var velocity = 200
+var velocity = 300
 var rotate_speed = 1
 var target_direction = 0
 
@@ -24,10 +24,10 @@ func _process(delta):
 	
 	if distance <= 100:
 		rotation = lerp_angle(rotation, target_direction+PI, 0.2)
-		position += Vector2.UP.rotated(rotation)*velocity*delta* min((100-distance)/20, 5)
+		position += Vector2.UP.rotated(rotation)*velocity*delta* min((100-distance)/20, 1)
 	else:
 		rotation = lerp_angle(rotation, target_direction, 0.05)
-		position += Vector2.UP.rotated(rotation)*min(velocity*delta*max(distance/300, 0.1), 200*delta)
+		position += Vector2.UP.rotated(rotation)*min(velocity*delta*max(distance/200, 0.1), 375*delta)
 
 func on_collision(area):
 	queue_free()
