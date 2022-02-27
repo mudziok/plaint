@@ -52,7 +52,8 @@ margin_bottom = 550.0
 hidden = true
 
 [node name="Bullet" parent="." instance=ExtResource( 3 )]
-position = Vector2( -108, 60 )
+position = Vector2( -120, -88 )
+player = NodePath("../Plane")
 
 [connection signal="all_guides_completed" from="Guide Manager" to="." method="level_finished"]
 [connection signal="fuel_changed" from="Plane" to="CanvasLayer/FuelGauge" method="set_value"]
