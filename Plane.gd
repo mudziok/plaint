@@ -67,7 +67,7 @@ func _process(delta):
 		velocity = min(velocity + acceleration*delta, max_velocity)
 		fuel_left -= fuel_usage*delta
 		emit_signal("new_smoke_point", position)
-	elif can_refill:
+	elif can_refill and !Input.is_action_pressed("accelerate"):
 		fuel_left = min(fuel_left+fuel_restore*delta, 100)
 	
 	emit_signal("fuel_changed", fuel_left)
